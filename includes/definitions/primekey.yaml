@@ -1,0 +1,14 @@
+os: primekey
+text: "PrimeKey Hardware Appliance"
+type: appliance
+icon: primekey
+group: primekey
+over:
+    - { graph: device_bits, text: "Device Traffic" }
+    - { graph: device_processor, text: "CPU Usage" }
+    - { graph: device_mempool, text: "Memory Usage" }
+discovery:
+    - snmpget:
+          oid: .1.3.6.1.4.1.22408.1.1.2.1.7.118.101.114.115.105.111.110.1
+          op: 'contains'
+          value: 'PrimeKey'
