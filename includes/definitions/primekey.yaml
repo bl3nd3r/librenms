@@ -3,6 +3,7 @@ text: "PrimeKey Hardware Appliance"
 type: appliance
 icon: primekey
 group: primekey
+snmp_bulk: false
 over:
     - { graph: device_bits, text: "Device Traffic" }
     - { graph: device_processor, text: "CPU Usage" }
@@ -13,6 +14,7 @@ poller_modules:
     stp: false
 discovery_modules:
     bgp-peers: false
+    cisco-vrf-lite: false
     stp: false
 discovery:
     - snmpget:
