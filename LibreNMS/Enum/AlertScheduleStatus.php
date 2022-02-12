@@ -27,7 +27,7 @@ namespace LibreNMS\Enum;
 
 class AlertScheduleStatus
 {
-    public const SET = 0;
-    public const LAPSED = 1;
-    public const ACTIVE = 2;
+    const SET = 0;
+    const LAPSED = 1;
+    const ACTIVE = 2;
 }

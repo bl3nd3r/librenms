@@ -32,7 +32,7 @@ use Symfony\Component\Process\Process;
 
 class Python extends BaseValidation
 {
-    public const PYTHON_MIN_VERSION = '3.4.0';
+    const PYTHON_MIN_VERSION = '3.4.0';
 
     /**
      * Validate this module.

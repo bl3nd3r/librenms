@@ -39,7 +39,7 @@ class DevicePerf extends DeviceRelatedModel
         'debug' => 'array',
     ];
     public $timestamps = false;
-    public const CREATED_AT = 'timestamp';
+    const CREATED_AT = 'timestamp';
     protected $attributes = [
         'min' => 0,
         'max' => 0,

@@ -35,18 +35,18 @@ class TwoFactor
      * Set to 30s due to Google-Authenticator limitation.
      * Sadly Google-Auth is the most used Non-Physical OTP app.
      */
-    public const KEY_INTERVAL = 30;
+    const KEY_INTERVAL = 30;
 
     /**
      * Size of the OTP.
      * Set to 6 for the same reasons as above.
      */
-    public const OTP_SIZE = 6;
+    const OTP_SIZE = 6;
 
     /**
      * Window to honour whilest verifying OTP.
      */
-    public const OTP_WINDOW = 4;
+    const OTP_WINDOW = 4;
 
     /**
      * Base32 Decoding dictionary

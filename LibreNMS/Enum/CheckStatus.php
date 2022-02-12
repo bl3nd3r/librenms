@@ -27,8 +27,8 @@ namespace LibreNMS\Enum;
 
 class CheckStatus
 {
-    public const OK = 0;
-    public const WARNING = 1;
-    public const ERROR = 2;
-    public const UNKNOWN = 3;
+    const OK = 0;
+    const WARNING = 1;
+    const ERROR = 2;
+    const UNKNOWN = 3;
 }

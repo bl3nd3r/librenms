@@ -27,16 +27,16 @@ namespace LibreNMS\Enum;
 
 class SyslogSeverity
 {
-    public const EMERGENCY = 'emerg';
-    public const ALERT = 'alert';
-    public const ERROR = 'err';
-    public const WARNING = 'warning';
-    public const NOTICE = 'notice';
-    public const INFO = 'info';
-    public const DEBUG = 'debug';
-    public const CRITICAL = 'crit';
+    const EMERGENCY = 'emerg';
+    const ALERT = 'alert';
+    const ERROR = 'err';
+    const WARNING = 'warning';
+    const NOTICE = 'notice';
+    const INFO = 'info';
+    const DEBUG = 'debug';
+    const CRITICAL = 'crit';
 
-    public const LEVELS = [
+    const LEVELS = [
         0 => self::EMERGENCY,
         1 => self::ALERT,
         2 => self::CRITICAL,
@@ -47,7 +47,7 @@ class SyslogSeverity
         7 => self::DEBUG,
     ];
 
-    public const STATUS = [
+    const STATUS = [
         self::EMERGENCY => CheckStatus::ERROR,
         self::ALERT => CheckStatus::ERROR,
         self::CRITICAL => CheckStatus::ERROR,
