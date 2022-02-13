@@ -5,8 +5,8 @@ icon: primekey
 group: primekey
 snmp_bulk: false
 over:
-    - { graph: device_bits, text: "Device Traffic" }
-    - { graph: device_processor, text: "CPU Usage" }
+    - { graph: device_temperature, text: Temperature }
+    - { graph: device_load, text: "Load Average" }
     - { graph: device_mempool, text: "Memory Usage" }
 poller_modules:
     bgp-peers: false
