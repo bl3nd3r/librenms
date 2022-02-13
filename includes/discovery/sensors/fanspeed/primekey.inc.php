@@ -34,19 +34,19 @@ foreach ($oids as $index => $entry) {
 
     if (is_numeric($current) && $current > '0') {
         discover_sensor($valid['sensor'],
-                        'fanspeed',
-                        $device,
-                        $oid,
-                        $index,
-                        'primekey',
-                        $descr,
-                        1, // divisor
-                        1, // multiplier,
-                        null, // low_limit,
-                        null, // low_warn_limit,
-                        null, // warn_limit,
-                        null, // high_limit,
-                        $current
+                        'fanspeed', // class
+                        $device,    // device
+                        $oid,       // oid
+                        $index,     // index
+                        'primekey', // type
+                        $descr,     // descr
+                        1,          // divisor
+                        1,          // multiplier
+                        null,       // low_limit
+                        null,       // low_warn_limit
+                        null,       // warn_limit
+                        null,       // high_limit
+                        $current    // current
                     );
     }
 }
