@@ -1025,3 +1025,14 @@ function array_by_column($array, $column)
 {
     return array_combine(array_column($array, $column), $array);
 }
+
+/**
+ * Return the first word of a string.
+ *
+ * @param  string  $value
+ * @return string (containing only the first word of $value)
+ */
+function first_word($value)
+{
+    return preg_replace('/\s+.*/', '', $value);
+}

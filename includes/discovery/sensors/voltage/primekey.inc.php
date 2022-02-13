@@ -8,17 +8,13 @@
 */
 
 $oids = [
-    50 => [
-        'descr' => ' 1min average',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.108.111.97.100.50.1',
-    ],
-    51 => [
-        'descr' => ' 5min average',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.108.111.97.100.51.1',
-    ],
     52 => [
-        'descr' => '15min average',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.108.111.97.100.52.1',
+        'descr' => 'HSM',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.52.1',
+    ],
+    55 => [
+        'descr' => 'Ext Battery',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.55.1',
     ],
 ];
 
@@ -26,23 +22,30 @@ foreach ($oids as $index => $entry) {
     $oid = $entry['oid'];
     $descr = $entry['descr'];
 
-    $load = snmp_get($device, $oid, '-Oqv');
+    $voltage = snmp_get($device, $oid, '-Oqv');
+    $voltage = first_word($voltage);
 
-    if (is_numeric($load) && $load > '0') {
+    // print preg_replace ('/\s+\S+/', '', $volgate);
+
+    if (is_numeric($voltage) && $voltage > '0') {
         discover_sensor($valid['sensor'],
-                        'load',     // class
+                        'voltage',  // class
                         $device,    // device
                         $oid,       // oid
                         $index,     // index
                         'primekey', // type
                         $descr,     // descr
                         1,          // divisor
-                        100,        // multiplier
+                        1,          // multiplier
                         null,       // low_limit
                         null,       // low_warn_limit
                         null,       // warn_limit
                         null,       // high_limit
-                        $load       // current
+                        $voltage,   // current
+                        'snmp',     // poller_type
+                        null,       // entPhysicalIndex
+                        null,       // entPhysicalIndex_measured
+                        'first_word' // user_func
                     );
     }
 }
