@@ -12,6 +12,7 @@ poller_modules:
     bgp-peers: false
     ospf: false
     stp: false
+    mpls: false
 discovery_modules:
     bgp-peers: false
     cisco-vrf-lite: false
