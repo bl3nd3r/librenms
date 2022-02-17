@@ -99,7 +99,7 @@ $oids = [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
             ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
         ],
-    ],  
+    ],
     10 => [  // @TODO clarify if internal or external
         'descr' => 'Battery state, 0 if ok, 1 otherwise',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.53.1',
@@ -145,13 +145,11 @@ foreach ($oids as $index => $entry) {
 
     //if (! empty($snmp_multi) && gettype($snmp_multi[$oid]) === 'string') {
     if (! empty($snmp_multi)) {
-
         $current = $snmp_multi[$oid];
 
         create_state_index($state_name, $states);
 
-        if ( is_numeric($current) ) {
-
+        if (is_numeric($current)) {
             discover_sensor($valid['sensor'],
                              $class,
                              $device,
