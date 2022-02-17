@@ -9,9 +9,9 @@
 
 $oids = [
     0 => [
-        'descr' => 'Status of all VMs, 0 if all are running, 1 otherwise',
+        'descr' => 'VMs Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.2.118.109.1',
-        'state_name' => 'VMs',
+        'state_name' => 'VmsStatus',
         'group' => 'VMs',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
@@ -19,9 +19,9 @@ $oids = [
         ],
     ],
     1 => [
-        'descr' => '1 if space for db exceeds 80% usage, 0 otherwise',
+        'descr' => 'DB Storage',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.118.100.98.50.1',
-        'state_name' => 'DB Storage',
+        'state_name' => 'DbStorage',
         'group' => 'DB',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => '< 80% full'],
@@ -29,19 +29,19 @@ $oids = [
         ],
     ],
     2 => [
-        'descr' => '0 if cpu fan ok, 1 otherwise',
+        'descr' => 'CPU Fan',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.53.1',
-        'state_name' => 'CPU Fan',
+        'state_name' => 'CpuFan',
         'group' => 'Fans',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'OK'],
             ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
         ],
     ],
     3 => [
-        'descr' => '0 if system fans are ok, 1 otherwise',
+        'descr' => 'System Fans',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.54.1',
-        'state_name' => 'System Fans',
+        'state_name' => 'SystemFans',
         'group' => 'Fans',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
@@ -49,9 +49,9 @@ $oids = [
         ],
     ],
     4 => [
-        'descr' => 'Status of RAID, 0 if clean or active, 1 otherwise',
+        'descr' => 'RAID Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.49.1',
-        'state_name' => 'RAID',
+        'state_name' => 'RaidStatus',
         'group' => 'Raid',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'CleanOrActive'],
@@ -59,15 +59,15 @@ $oids = [
         ],
     ],
     // 5 => [       // @TODO determine state mappings
-    //     'descr' => 'Local db cluster (galera) state',
-    //     'state_name' => 'Galera',
+    //     'descr' => 'Galera Status',
+    //     'state_name' => 'Galera Status',
     //     'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1',
     //     'group' => 'DB',
     // ],
     6 => [
-        'descr' => 'EJBCA healthcheck returns 0 for "ALLOK", 1 otherwise',
+        'descr' => 'EJBCA Healthcheck',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.101.50.1',
-        'state_name' => 'EJBCA',
+        'state_name' => 'EjbcaHealthcheck',
         'group' => 'Apps',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
@@ -75,9 +75,9 @@ $oids = [
         ],
     ],
     7 => [
-        'descr' => 'Signserver healthcheck returns 0 for "ALLOK", 1 otherwise',
+        'descr' => 'Signserver Healthcheck',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.115.50.1',
-        'state_name' => 'Signserver',
+        'state_name' => 'SignserverHealthcheck',
         'group' => 'Apps',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
@@ -91,9 +91,9 @@ $oids = [
     //     'group' => 'HSM',
     // ],
     9 => [
-        'descr' => 'Status of HSM, 0 if operational, 1 otherwise',
+        'descr' => 'HSM Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.51.1',
-        'state_name' => 'HSM Status',
+        'state_name' => 'HsmStatus',
         'group' => 'HSM',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
@@ -101,9 +101,9 @@ $oids = [
         ],
     ],
     10 => [  // @TODO clarify if internal or external
-        'descr' => 'Battery state, 0 if ok, 1 otherwise',
+        'descr' => 'HSM Battery',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.53.1',
-        'state_name' => 'Battery State',
+        'state_name' => 'HsmBattery',
         'group' => 'HSM',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
@@ -111,10 +111,10 @@ $oids = [
         ],
     ],
     11 => [
-        'descr' => 'Battery state, 0 if ok or absent, 1 otherwise',
+        'descr' => 'Ext Battery',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.56.1',
-        'state_name' => 'External Battery',
-        'group' => 'HSM',
+        'state_name' => 'ExternalBattery',
+        'group' => 'Ext Battery',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'OkOrAbsent'],
             ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
@@ -151,24 +151,24 @@ foreach ($oids as $index => $entry) {
 
         if (is_numeric($current)) {
             discover_sensor($valid['sensor'],
-                             $class,
-                             $device,
-                             $oid,
-                             $index,
-                             $state_name,
-                             $descr,
-                             $divisor,
-                             $multiplier,
-                             $low_limit,
-                             $low_warn_limit,
-                             $warn_limit,
-                             $high_limit,
-                             $current,
-                             $poller_type,
-                             $entPhysicalIndex,
-                             $entPhysicalIndex_measured,
-                             $user_func,
-                             $group
+                             $class,            // class
+                             $device,           // device
+                             $oid,              // oid
+                             $index,            // index
+                             $state_name,       // type
+                             $descr,            // descr
+                             $divisor,          // divisor
+                             $multiplier,       // multiplier
+                             $low_limit,        // low_limit
+                             $low_warn_limit,   // low_warn_limit
+                             $warn_limit,       // warn_limit
+                             $high_limit,       // high_limit
+                             $current,          // current
+                             $poller_type,      // poller_type
+                             $entPhysicalIndex, // entPhysicalIndex
+                             $entPhysicalIndex_measured, // entPhysicalIndex_measured
+                             $user_func,        // user_func
+                             $group             // group
                             );
             create_sensor_to_state_index($device, $state_name, $index);
         }
