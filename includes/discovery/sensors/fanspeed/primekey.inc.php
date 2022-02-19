@@ -10,7 +10,7 @@
  *
  * The OIDs described here, for the EJBCA Appliance:
  * https://doc.primekey.com/ejbca-appliance/operations/webconf-configurator-of-hardware-appliance/monitoring
- * 
+ *
  * @package    LibreNMS
  * @subpackage webui
  * @link       https://www.librenms.org

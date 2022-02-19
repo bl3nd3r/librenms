@@ -1028,7 +1028,7 @@ function array_by_column($array, $column)
 
 /**
  * Return the first word from a string.
- * 
+ *
  * For example if passed an SNMP response that contains units such as
  * "3.115 V", this function will simply return "3.115".
  *
