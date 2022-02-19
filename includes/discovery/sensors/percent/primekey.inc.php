@@ -7,22 +7,65 @@
  *
 */
 
-$usage = snmp_get($device, '.1.3.6.1.4.1.22408.1.1.2.1.4.118.100.98.49.1', '-Oqv');
-if (is_numeric($usage) && $usage > '0') {
-    $descr = 'Database Usage';
-    discover_sensor($valid['sensor'],
-                    'percent',  // class
-                    $device,    // device
-                    '.1.3.6.1.4.1.22408.1.1.2.1.4.118.100.98.49.1', // oid
-                    '49',       // index
-                    'primekey', // type
-                    $descr,     // descr
-                    1,          // divisor
-                    1,          // multiplier
-                    null,       // low_limit
-                    null,       // low_warn_limit
-                    80,         // warn_limit
-                    100,        // high_limit
-                    $usage      // current
-                );
+$oids = [
+    0 => [
+        'descr' => 'Database Usage',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.118.100.98.49.1',
+        'group' => 'Database',
+    ],
+];
+
+
+$class = 'percent';
+
+$type = 'primekey';
+$divisor = 1;
+$multiplier = 1;
+$low_limit = null;
+$low_warn_limit = null;
+$warn_limit = null;
+$high_limit = null;
+$poller_type = 'snmp';
+$entPhysicalIndex = null;
+$entPhysicalIndex_measured = null;
+$user_func = null;
+
+$transaction = snmp_get_multi_oid($device, array_column($oids, 'oid'));
+
+foreach ($oids as $index => $entry) {
+    $oid = $entry['oid'];
+    $descr = $entry['descr'];
+    $group = $entry['group'];
+
+    if (! empty($transaction)) {
+        $current = $transaction[$oid];
+
+        if (is_numeric($current)) {
+
+            discover_sensor($valid['sensor'],
+                            $class,
+                            $device,
+                            $oid,
+                            $index,
+                            $type,
+                            $descr,
+                            $divisor,
+                            $multiplier,
+                            $low_limit,
+                            $low_warn_limit,
+                            $warn_limit,
+                            $high_limit,
+                            $current,
+                            $poller_type,
+                            $entPhysicalIndex,
+                            $entPhysicalIndex_measured,
+                            $user_func,
+                            $group
+                            );
+        }
+    }
 }
+unset ($transaction, $class, $oid, $index, $type, $descr, $divisor,
+       $multiplier, $low_limit, $low_warn_limit, $warn_limit, $high_limit,
+       $current, $poller_type, $entPhysicalIndex, $entPhysicalIndex_measured, 
+       $user_func, $group);

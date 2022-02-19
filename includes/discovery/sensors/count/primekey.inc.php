@@ -46,6 +46,7 @@ $oids = [
 ];
 
 $class = 'count';
+
 $type = 'primekey';
 $divisor = 1;
 $multiplier = 1;

@@ -12,17 +12,16 @@ $oids = [
         'descr' => 'Carrier Battery',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.52.1',
         'group' => 'HSM',
-        'user_func' => 'first_word',
     ],
     55 => [
         'descr' => 'External Battery',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.55.1',
         'group' => 'HSM',
-        'user_func' => 'first_word',
     ],
 ];
 
 $class = 'voltage';
+
 $type = 'primekey';
 $divisor = 1;
 $multiplier = 1;
@@ -33,6 +32,7 @@ $high_limit = null;
 $poller_type = 'snmp';
 $entPhysicalIndex = null;
 $entPhysicalIndex_measured = null;
+$user_func = 'first_word';  // Strip the units (' V') off the returned value
 
 $transaction = snmp_get_multi_oid($device, array_column($oids, 'oid'));
 

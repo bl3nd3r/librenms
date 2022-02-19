@@ -19,46 +19,6 @@ $oids = [
         ],
     ],
     1 => [
-        'descr' => 'CPU Fan',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.53.1',
-        'state_name' => 'CpuFan',
-        'group' => 'Fans',
-        'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'OK'],
-            ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
-        ],
-    ],
-    2 => [
-        'descr' => 'System Fans',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.54.1',
-        'state_name' => 'SystemFans',
-        'group' => 'Fans',
-        'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
-            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Fail'],
-        ],
-    ],
-    3 => [
-        'descr' => 'DB Storage',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.118.100.98.50.1',
-        'state_name' => 'DbStorage',
-        'group' => 'DB',
-        'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => '< 80% full'],
-            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => '> 80% full'],
-        ],
-    ],
-    4 => [
-        'descr' => 'RAID Status',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.49.1',
-        'state_name' => 'RaidStatus',
-        'group' => 'RAID',
-        'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'Clean or Active'],
-            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Degraded'],
-        ],
-    ],
-    5 => [
         'descr' => 'EJBCA Healthcheck',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.101.50.1',
         'state_name' => 'EjbcaHealthcheck',
@@ -68,7 +28,7 @@ $oids = [
             ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
         ],
     ],
-    6 => [
+    2 => [
         'descr' => 'Signserver Healthcheck',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.115.50.1',
         'state_name' => 'SignserverHealthcheck',
@@ -78,7 +38,37 @@ $oids = [
             ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
         ],
     ],
-    7 => [
+    3 => [
+        'descr' => 'CPU Fan',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.53.1',
+        'state_name' => 'CpuFan',
+        'group' => 'Fans',
+        'states' => [
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'OK'],
+            ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
+        ],
+    ],
+    4 => [
+        'descr' => 'System Fans',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.54.1',
+        'state_name' => 'SystemFans',
+        'group' => 'Fans',
+        'states' => [
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
+            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Fail'],
+        ],
+    ],
+    5 => [
+        'descr' => 'DB Storage',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.118.100.98.50.1',
+        'state_name' => 'DbStorage',
+        'group' => 'Database',
+        'states' => [
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => '< 80% full'],
+            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => '> 80% full'],
+        ],
+    ],
+    6 => [
         'descr' => 'Galera Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1',
         'state_name' => 'Galera Status',
@@ -100,6 +90,16 @@ $oids = [
             ['value' => 5, 'generic' => 0, 'graph' => 4, 'descr' => 'Synced'],
             ['value' => 6, 'generic' => 2, 'graph' => 5, 'descr' => 'Error'],
             ['value' => 7, 'generic' => 2, 'graph' => 6, 'descr' => 'Max'],
+        ],
+    ],
+    7 => [
+        'descr' => 'RAID Status',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.49.1',
+        'state_name' => 'RaidStatus',
+        'group' => 'RAID',
+        'states' => [
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'Clean or Active'],
+            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Degraded'],
         ],
     ],
     8 => [
