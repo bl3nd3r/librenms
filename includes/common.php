@@ -1027,12 +1027,15 @@ function array_by_column($array, $column)
 }
 
 /**
- * Return the first word of a string.
+ * Return the first word from a string.
+ * 
+ * For example if passed an SNMP response that contains units such as
+ * "3.115 V", this function will simply return "3.115".
  *
  * @param  string  $value
  * @return string (containing only the first word of $value)
  */
 function first_word($value)
 {
-    return preg_replace('/\s+.*/', '', $value);
+    return preg_replace('/^\s?(\S*)\s+.*/', '$1', $value);
 }
