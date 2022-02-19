@@ -12,7 +12,7 @@ $oids = [
         'descr' => 'VMs Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.2.118.109.1',
         'state_name' => 'VmsStatus',
-        'group' => 'VMs',
+        'group' => 'Virtual Machines',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
             ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Some Inactive'],
@@ -52,7 +52,7 @@ $oids = [
         'descr' => 'RAID Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.49.1',
         'state_name' => 'RaidStatus',
-        'group' => 'Raid',
+        'group' => 'RAID',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'Clean or Active'],
             ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Degraded'],
@@ -62,7 +62,7 @@ $oids = [
         'descr' => 'Galera Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1',
         'state_name' => 'Galera Status',
-        'group' => 'DB',
+        'group' => 'Database',
         # Galera node status is reported by this MiB based on:
         #     - wsrep_local_state
         #         .1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1
@@ -86,7 +86,7 @@ $oids = [
         'descr' => 'EJBCA Healthcheck',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.101.50.1',
         'state_name' => 'EjbcaHealthcheck',
-        'group' => 'Apps',
+        'group' => 'VMs',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
             ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
@@ -96,7 +96,7 @@ $oids = [
         'descr' => 'Signserver Healthcheck',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.115.50.1',
         'state_name' => 'SignserverHealthcheck',
-        'group' => 'Apps',
+        'group' => 'VMs',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
             ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
@@ -161,7 +161,7 @@ $entPhysicalIndex = null;
 $entPhysicalIndex_measured = null;
 $user_func = null;
 
-$snmp_multi = snmp_get_multi_oid($device, array_column($oids, 'oid'));
+$transaction = snmp_get_multi_oid($device, array_column($oids, 'oid'));
 
 foreach ($oids as $index => $entry) {
     $oid = $entry['oid'];
@@ -170,38 +170,37 @@ foreach ($oids as $index => $entry) {
     $group = $entry['group'];
     $states = $entry['states'];
 
-    //if (! empty($snmp_multi) && gettype($snmp_multi[$oid]) === 'string') {
-    if (! empty($snmp_multi)) {
-        $current = $snmp_multi[$oid];
+    if (! empty($transaction)) {
+        $current = $transaction[$oid];
 
         create_state_index($state_name, $states);
 
         if (is_numeric($current)) {
             discover_sensor($valid['sensor'],
-                             $class,            // class
-                             $device,           // device
-                             $oid,              // oid
-                             $index,            // index
-                             $state_name,       // type
-                             $descr,            // descr
-                             $divisor,          // divisor
-                             $multiplier,       // multiplier
-                             $low_limit,        // low_limit
-                             $low_warn_limit,   // low_warn_limit
-                             $warn_limit,       // warn_limit
-                             $high_limit,       // high_limit
-                             $current,          // current
-                             $poller_type,      // poller_type
-                             $entPhysicalIndex, // entPhysicalIndex
-                             $entPhysicalIndex_measured, // entPhysicalIndex_measured
-                             $user_func,        // user_func
-                             $group             // group
+                             $class,
+                             $device,
+                             $oid,
+                             $index,
+                             $state_name,
+                             $descr,
+                             $divisor,
+                             $multiplier,
+                             $low_limit,
+                             $low_warn_limit,
+                             $warn_limit,
+                             $high_limit,
+                             $current,
+                             $poller_type,
+                             $entPhysicalIndex,
+                             $entPhysicalIndex_measured,
+                             $user_func,
+                             $group
                             );
             create_sensor_to_state_index($device, $state_name, $index);
         }
     }
 }
-unset($class, $device, $oid, $index, $state_name, $descr, $divisor, $multiplier,
-        $low_limit, $low_warn_limit, $warn_limit, $high_limit, $current,
-        $poller_type, $entPhysicalIndex, $entPhysicalIndex_measured, $user_func,
-        $group);
+unset($transaction, $class, $device, $oid, $index, $state_name, $descr, 
+        $divisor, $multiplier, $low_limit, $low_warn_limit, $warn_limit, 
+        $high_limit, $current, $poller_type, $entPhysicalIndex, 
+        $entPhysicalIndex_measured, $user_func, $group);

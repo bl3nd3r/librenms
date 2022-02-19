@@ -9,11 +9,11 @@
 
 $oids = [
     52 => [
-        'descr' => 'Carrier',
+        'descr' => 'Carrier Battery',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.52.1',
     ],
     55 => [
-        'descr' => 'Extternal',
+        'descr' => 'External Battery',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.55.1',
     ],
 ];
@@ -24,8 +24,6 @@ foreach ($oids as $index => $entry) {
 
     $voltage = snmp_get($device, $oid, '-Oqv');
     $voltage = first_word($voltage);
-
-    // print preg_replace ('/\s+\S+/', '', $volgate);
 
     if (is_numeric($voltage) && $voltage > '0') {
         discover_sensor($valid['sensor'],
