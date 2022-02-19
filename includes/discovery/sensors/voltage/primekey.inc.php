@@ -40,7 +40,7 @@ foreach ($oids as $index => $entry) {
     $oid = $entry['oid'];
     $descr = $entry['descr'];
     $group = $entry['group'];
-    $user_func = $entry['user_func'];;
+    $user_func = $entry['user_func'];
 
     if (! empty($transaction)) {
         $current = $transaction[$oid];
@@ -69,7 +69,7 @@ foreach ($oids as $index => $entry) {
         }
     }
 }
-unset ($oids, $transaction, $class, $oid, $index, $type, $descr,
+unset($oids, $transaction, $class, $oid, $index, $type, $descr,
        $divisor, $multiplier, $low_limit, $low_warn_limit, $warn_limit,
        $high_limit, $current, $poller_type, $entPhysicalIndex,
        $entPhysicalIndex_measured, $user_func, $group);

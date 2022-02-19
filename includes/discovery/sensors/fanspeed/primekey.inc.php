@@ -55,7 +55,6 @@ foreach ($oids as $index => $entry) {
         $current = $transaction[$oid];
 
         if (is_numeric($current)) {
-
             discover_sensor($valid['sensor'],
                             $class,
                             $device,
@@ -79,7 +78,7 @@ foreach ($oids as $index => $entry) {
         }
     }
 }
-unset ($transaction, $class, $oid, $index, $type, $descr, $divisor,
+unset($transaction, $class, $oid, $index, $type, $descr, $divisor,
        $multiplier, $low_limit, $low_warn_limit, $warn_limit, $high_limit,
-       $current, $poller_type, $entPhysicalIndex, $entPhysicalIndex_measured, 
+       $current, $poller_type, $entPhysicalIndex, $entPhysicalIndex_measured,
        $user_func, $group);
