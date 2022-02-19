@@ -7,43 +7,41 @@
  *
 */
 
-print ("Polling for COUNT\n");
-
 $oids = [
     0 => [
-        'descr' => 'Transaction ID',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.54.1',
-        'group' => 'Database'
-    ],
-    1 => [
-        'descr' => 'Devices in RAID',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.52.1',
-        'group' => 'RAID'
-    ],
-    2 => [
-        'descr' => 'Active Devices in RAID',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.54.1',
-        'group' => 'RAID'
-    ],
-    3 => [
-        'descr' => 'Active Devices in RAID',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.54.1',
-        'group' => 'RAID'
-    ],
-    4 => [
         'descr' => 'Local Node ID',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.49.1',
-        'group' => 'Database'
+        'group' => 'Database',
     ],
-    5 => [
+    1 => [
         'descr' => 'DB Cluster Size',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.50.1',
-        'group' => 'Database'
+        'group' => 'Database',
     ],
-    6 => [
+    2 => [
         'descr' => 'Active Cluster Nodes',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.51.1',
-        'group' => 'Database'
+        'group' => 'Database',
+    ],
+    3 => [
+        'descr' => 'Transaction ID',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.54.1',
+        'group' => 'Database',
+    ],
+    4 => [
+        'descr' => 'Devices in RAID',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.52.1',
+        'group' => 'RAID',
+    ],
+    5 => [
+        'descr' => 'Active Devices in RAID',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.54.1',
+        'group' => 'RAID',
+    ],
+    6 => [
+        'descr' => 'Active Devices in RAID',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.5.114.97.105.100.54.1',
+        'group' => 'RAID',
     ],
 ];
 
@@ -95,7 +93,7 @@ foreach ($oids as $index => $entry) {
         }
     }
 }
-unset ($transaction, $class, $device, $oid, $index, $type, $descr, $divisor, 
-       $multiplier, $low_limit, $low_warn_limit, $warn_limit, $high_limit, 
+unset ($transaction, $class, $oid, $index, $type, $descr, $divisor,
+       $multiplier, $low_limit, $low_warn_limit, $warn_limit, $high_limit,
        $current, $poller_type, $entPhysicalIndex, $entPhysicalIndex_measured, 
        $user_func, $group);

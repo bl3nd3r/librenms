@@ -12,23 +12,13 @@ $oids = [
         'descr' => 'VMs Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.2.118.109.1',
         'state_name' => 'VmsStatus',
-        'group' => 'Virtual Machines',
+        'group' => 'VMs',
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
             ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Some Inactive'],
         ],
     ],
     1 => [
-        'descr' => 'DB Storage',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.118.100.98.50.1',
-        'state_name' => 'DbStorage',
-        'group' => 'DB',
-        'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => '< 80% full'],
-            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => '> 80% full'],
-        ],
-    ],
-    2 => [
         'descr' => 'CPU Fan',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.53.1',
         'state_name' => 'CpuFan',
@@ -38,7 +28,7 @@ $oids = [
             ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
         ],
     ],
-    3 => [
+    2 => [
         'descr' => 'System Fans',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.54.1',
         'state_name' => 'SystemFans',
@@ -46,6 +36,16 @@ $oids = [
         'states' => [
             ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
             ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Fail'],
+        ],
+    ],
+    3 => [
+        'descr' => 'DB Storage',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.4.118.100.98.50.1',
+        'state_name' => 'DbStorage',
+        'group' => 'DB',
+        'states' => [
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => '< 80% full'],
+            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => '> 80% full'],
         ],
     ],
     4 => [
@@ -59,6 +59,26 @@ $oids = [
         ],
     ],
     5 => [
+        'descr' => 'EJBCA Healthcheck',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.101.50.1',
+        'state_name' => 'EjbcaHealthcheck',
+        'group' => 'VMs',
+        'states' => [
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
+            ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
+        ],
+    ],
+    6 => [
+        'descr' => 'Signserver Healthcheck',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.115.50.1',
+        'state_name' => 'SignserverHealthcheck',
+        'group' => 'VMs',
+        'states' => [
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
+            ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
+        ],
+    ],
+    7 => [
         'descr' => 'Galera Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1',
         'state_name' => 'Galera Status',
@@ -68,7 +88,7 @@ $oids = [
         #         .1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1
         #     - wsrep_local_state_comment
         #         .1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.53.1
-        # This state table is an interpretaion of how these two MariaDB
+        # This state table is an interpretation of how these two MariaDB
         # status variables map together based on two sources:
         # https://github.com/codership/wsrep-API/blob/master/wsrep_api.h#L306 and
         # https://galeracluster.com/library/documentation/node-states.html#node-state-changes
@@ -80,26 +100,6 @@ $oids = [
             ['value' => 5, 'generic' => 0, 'graph' => 4, 'descr' => 'Synced'],
             ['value' => 6, 'generic' => 2, 'graph' => 5, 'descr' => 'Error'],
             ['value' => 7, 'generic' => 2, 'graph' => 6, 'descr' => 'Max'],
-        ],
-    ],
-    6 => [
-        'descr' => 'EJBCA Healthcheck',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.101.50.1',
-        'state_name' => 'EjbcaHealthcheck',
-        'group' => 'VMs',
-        'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
-            ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
-        ],
-    ],
-    7 => [
-        'descr' => 'Signserver Healthcheck',
-        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.115.50.1',
-        'state_name' => 'SignserverHealthcheck',
-        'group' => 'VMs',
-        'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
-            ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
         ],
     ],
     8 => [
@@ -200,7 +200,7 @@ foreach ($oids as $index => $entry) {
         }
     }
 }
-unset($transaction, $class, $device, $oid, $index, $state_name, $descr, 
-        $divisor, $multiplier, $low_limit, $low_warn_limit, $warn_limit, 
-        $high_limit, $current, $poller_type, $entPhysicalIndex, 
+unset($oids, $transaction, $class, $oid, $index, $state_name, $descr,
+        $divisor, $multiplier, $low_limit, $low_warn_limit, $warn_limit,
+        $high_limit, $current, $poller_type, $entPhysicalIndex,
         $entPhysicalIndex_measured, $user_func, $group);
