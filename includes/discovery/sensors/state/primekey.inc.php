@@ -14,8 +14,8 @@ $oids = [
         'state_name' => 'VmsStatus',
         'group' => 'VMs',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
-            ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
+            ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Some Inactive'],
         ],
     ],
     1 => [
@@ -44,7 +44,7 @@ $oids = [
         'state_name' => 'SystemFans',
         'group' => 'Fans',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
             ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Fail'],
         ],
     ],
@@ -54,24 +54,42 @@ $oids = [
         'state_name' => 'RaidStatus',
         'group' => 'Raid',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'CleanOrActive'],
-            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Unhealthy'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'Clean or Active'],
+            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'Degraded'],
         ],
     ],
-    // 5 => [       // @TODO determine state mappings
-    //     'descr' => 'Galera Status',
-    //     'state_name' => 'Galera Status',
-    //     'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1',
-    //     'group' => 'DB',
-    // ],
+    5 => [
+        'descr' => 'Galera Status',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1',
+        'state_name' => 'Galera Status',
+        'group' => 'DB',
+        # Galera node status is reported by this MiB based on:
+        #     - wsrep_local_state
+        #         .1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.52.1
+        #     - wsrep_local_state_comment
+        #         .1.3.6.1.4.1.22408.1.1.2.1.8.99.108.117.115.116.101.114.53.1
+        # This state table is an interpretaion of how these two MariaDB
+        # status variables map together based on two sources:
+        # https://github.com/codership/wsrep-API/blob/master/wsrep_api.h#L306 and
+        # https://galeracluster.com/library/documentation/node-states.html#node-state-changes
+        'states' => [
+            ['value' => 1, 'generic' => 3, 'graph' => 0, 'descr' => 'Undefined'],
+            ['value' => 2, 'generic' => 1, 'graph' => 1, 'descr' => 'Joiner'],
+            ['value' => 3, 'generic' => 0, 'graph' => 2, 'descr' => 'Donor'],
+            ['value' => 4, 'generic' => 0, 'graph' => 3, 'descr' => 'Joined'],
+            ['value' => 5, 'generic' => 0, 'graph' => 4, 'descr' => 'Synced'],
+            ['value' => 6, 'generic' => 2, 'graph' => 5, 'descr' => 'Error'],
+            ['value' => 7, 'generic' => 2, 'graph' => 6, 'descr' => 'Max'],
+        ],
+    ],
     6 => [
         'descr' => 'EJBCA Healthcheck',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.1.8.104.101.97.108.116.104.101.50.1',
         'state_name' => 'EjbcaHealthcheck',
         'group' => 'Apps',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
-            ['value' => 1, 'generic' => 2, 'graph' => 2, 'descr' => 'NotRunning'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
+            ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
         ],
     ],
     7 => [
@@ -80,44 +98,53 @@ $oids = [
         'state_name' => 'SignserverHealthcheck',
         'group' => 'Apps',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
-            ['value' => 1, 'generic' => 2, 'graph' => 2, 'descr' => 'NotRunning'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'All OK'],
+            ['value' => 1, 'generic' => 3, 'graph' => 2, 'descr' => 'Not Running or Unhealthy'],
         ],
     ],
-    // 8 => [    // @TODO determine state mappings
-    //     'descr' => 'Enum of Status of HSM',
-    //     'state_name' => 'HSM',
-    //     'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.50.1',
-    //     'group' => 'HSM',
-    // ],
+    8 => [
+        'descr' => 'Enum of Status of HSM',
+        'state_name' => 'HsmEnum',
+        'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.50.1',
+        'group' => 'HSM',
+        'states' => [
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'STATUS_is_OPER'],
+            ['value' => 1, 'generic' => 1, 'graph' => 1, 'descr' => 'STATUS_is_MAINT'],
+            ['value' => 2, 'generic' => 1, 'graph' => 2, 'descr' => 'STATUS_is_BOOT'],
+            ['value' => 3, 'generic' => 2, 'graph' => 3, 'descr' => 'STATUS_is_ALARM'],
+            ['value' => 4, 'generic' => 2, 'graph' => 4, 'descr' => 'STATUS_is_EXTERNALERASE'],
+            ['value' => 5, 'generic' => 2, 'graph' => 5, 'descr' => 'STATUS_is_FAIL'],
+            ['value' => 5, 'generic' => 3, 'graph' => 6, 'descr' => 'STATUS_is_OTHER'],
+        ],
+    ],
     9 => [
         'descr' => 'HSM Status',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.51.1',
         'state_name' => 'HsmStatus',
         'group' => 'HSM',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'OK'],
             ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
         ],
     ],
-    10 => [  // @TODO clarify if internal or external
-        'descr' => 'HSM Battery',
+    10 => [
+        'descr' => 'Carrier Battery',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.53.1',
-        'state_name' => 'HsmBattery',
+        'state_name' => 'CarrierBattery',
         'group' => 'HSM',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'AllOK'],
-            ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'OK'],
+            ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Low or Fail'],
         ],
     ],
     11 => [
         'descr' => 'Ext Battery',
         'oid'   => '.1.3.6.1.4.1.22408.1.1.2.2.4.104.115.109.56.1',
         'state_name' => 'ExternalBattery',
-        'group' => 'Ext Battery',
+        'group' => 'HSM',
         'states' => [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'OkOrAbsent'],
-            ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Fail'],
+            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'Ok or Absent'],
+            ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Low or Fail'],
         ],
     ],
 ];
@@ -174,3 +201,7 @@ foreach ($oids as $index => $entry) {
         }
     }
 }
+unset($class, $device, $oid, $index, $state_name, $descr, $divisor, $multiplier,
+        $low_limit, $low_warn_limit, $warn_limit, $high_limit, $current,
+        $poller_type, $entPhysicalIndex, $entPhysicalIndex_measured, $user_func,
+        $group);
