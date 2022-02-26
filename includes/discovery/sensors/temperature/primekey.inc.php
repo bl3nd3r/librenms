@@ -42,7 +42,7 @@ $user_func = null;
 
 $transaction = snmp_get_multi_oid($device, array_column($oids, 'oid'));
 
-foreach ($oids as $index => $entry) {
+foreach ( $oids as $index => $entry ) {
     $oid = $entry['oid'];
     $descr = $entry['descr'];
     $group = $entry['group'];
@@ -50,13 +50,13 @@ foreach ($oids as $index => $entry) {
     if ( oid_is_numeric($oid) ) {
         $oid_num = $oid;
     } else {
-        $oid_num = snmp_translate($oid, 'PRIMEKEY-APPLIANCE-MIB', 'primekey', '-On');
+        $oid_num = snmp_translate($oid, 'ALL', 'primekey', '-On');
     }
     
-    if (! empty($transaction)) {
+    if ( ! empty($transaction) ) {
         $current = $transaction[$oid_num];
 
-        if (is_numeric($current)) {
+        if ( is_numeric($current) ) {
             discover_sensor($valid['sensor'],
                             $class,
                             $device,
