@@ -20,9 +20,10 @@
 
 $oids = [
     0 => [
-        'descr' => 'CPU Temperature',
-        'oid'   => 'PRIMEKEY-APPLIANCE-MIB::pkASfpCpuTemp',
-        'group' => 'CPU',
+        'descr'   => 'CPU Temperature',
+        'oid'     => 'PRIMEKEY-APPLIANCE-MIB::pkASfpCpuTemp',
+        'oid_num' => '.1.3.6.1.4.1.22408.1.1.2.1.3.99.112.117.1',
+        'group'   => 'CPU',
     ],
 ];
 
@@ -44,17 +45,18 @@ $transaction = snmp_get_multi_oid($device, array_column($oids, 'oid'));
 
 foreach ($oids as $index => $entry) {
     $oid = $entry['oid'];
+    $oid_num = $entry['oid_num'];
     $descr = $entry['descr'];
     $group = $entry['group'];
 
     if (! empty($transaction)) {
-        $current = $transaction[$oid];
+        $current = $transaction[$oid_num];
 
         if (is_numeric($current)) {
             discover_sensor($valid['sensor'],
                             $class,
                             $device,
-                            $oid,
+                            $oid_num,
                             $index,
                             $type,
                             $descr,
