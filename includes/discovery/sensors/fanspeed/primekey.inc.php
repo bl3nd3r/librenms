@@ -22,25 +22,21 @@ $oids = [
     49 => [
         'descr'   => 'CPU Fan',
         'oid'     => 'PRIMEKEY-APPLIANCE-MIB::pkASfpCpuFan',
-        'oid_num' => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.49.1',
         'group'   => 'CPU',
     ],
     50 => [
         'descr'   => 'System Fan 1',
         'oid'     => 'PRIMEKEY-APPLIANCE-MIB::pkASfpSysFan1',
-        'oid_num' => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.50.1',
         'group'   => 'System',
     ],
     51 => [
         'descr'   => 'System Fan 2',
         'oid'     => 'PRIMEKEY-APPLIANCE-MIB::pkASfpSysFan2',
-        'oid_num' => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.51.1',
         'group'   => 'System',
     ],
     52 => [
         'descr'   => 'System Fan 3',
         'oid'     => 'PRIMEKEY-APPLIANCE-MIB::pkASfpSysFan3',
-        'oid_num' => '.1.3.6.1.4.1.22408.1.1.2.1.4.102.97.110.52.1',
         'group'   => 'System',
     ],
 ];
@@ -63,9 +59,14 @@ $transaction = snmp_get_multi_oid($device, array_column($oids, 'oid'));
 
 foreach ($oids as $index => $entry) {
     $oid = $entry['oid'];
-    $oid_num = $entry['oid_num'];
     $descr = $entry['descr'];
     $group = $entry['group'];
+
+    if ( oid_is_numeric($oid) ) {
+        $oid_num = $oid;
+    } else {
+        $oid_num = snmp_translate($oid, 'PRIMEKEY-APPLIANCE-MIB', 'primekey', '-On');
+    }
 
     if (! empty($transaction)) {
         $current = $transaction[$oid_num];
