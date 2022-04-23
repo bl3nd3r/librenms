@@ -6,9 +6,9 @@ group: primekey
 mib_dir: primekey
 snmp_bulk: false
 over:
-    - { graph: device_fanspeed, text: "Fan Speed" }
-    - { graph: device_temperature, text: "Temperature" }
     - { graph: device_voltage, text: "HSM Voltage" }
+    - { graph: device_temperature, text: "Temperature" }
+    - { graph: device_fanspeed, text: "Fan Speed" }
 poller_modules:
     bgp-peers: false
     ospf: false
